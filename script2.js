@@ -1,11 +1,10 @@
-//3rd attempt
-
 let input1 = '';
 let input2 = '';
 let result = '';
 let useOperator = '';
 let operator1 = '';
 let operator2 = '';
+let currentOperand = '';
 
 const number = document.querySelectorAll('.num');
 const operator = document.querySelectorAll('.opera');
@@ -20,21 +19,31 @@ for (numb of number) {
         if (input1 === '' || operator1 === '') {
             input1 += val;
             output.textContent = input1;
+            console.log('input1');
+            
         }
         // 
         else if (input2 === '' && operator2 === '') {
             input2 += val;
             output.textContent = input2;
+            console.log('input2');
     }
         else  {
             input2 += val;
             output.textContent = input2;
+            console.log('input2else');
     }
 }
     )
 }
 
-//if operator2 != '', clear input2 and assign new numbers 
+// 3 
+// * 
+// 6 
+// *  = 18
+// 9
+// enter = 162
+// + = 1458
 
 
 for (opera of operator) {
@@ -42,22 +51,32 @@ for (opera of operator) {
         if (operator1 === ''){
             operator1 = e.target.innerText;
             currentOperand = operator1;
+            console.log('opera1');
         }
         else if (operator2 === ''){
             result = operate(input1, input2);
             operator2 = e.target.innerText;
             currentOperand = operator2;
             input2 = '';
+            console.log('opera2');
         }
-        else {
+        else if (input2 != '' && operator2 != '') {
             result = operate(result, input2);
             operator2 = e.target.innerText;
             currentOperand = operator2;
             input2 = '';
+            console.log('opera3');
+        }
+        else if (input2 != '' && operator2 === '') {
+            operator2 = e.target.innerText;
+            currentOperand = operator2;
+            input2 = '';
+            console.log('opera4');
         }
     });
     }
-//console.log(`input1:${input1}\ninput2:${input2}\noperator1: ${operator1}\noperator2:${operator2}\ncurrent:${currentOperand}\nresult: ${result}`)
+
+//console.log(`input1:${input1}\ninput2:${input2}\noperator1:${operator1}\noperator2:${operator2}\ncurrent:${currentOperand}\nresult: ${result}`)
 function operate(x, y) {
     if (currentOperand === '+') {
         let sum = Number(x) + Number(y);
@@ -80,14 +99,17 @@ function operate(x, y) {
         return quotient
     }}
 
-//when trying to add 3rd operand, applies it to input1 instead of result
-// result = input1 + input2, then do result = result + input2
 
 enter.addEventListener('click', (e) => {
-    if (operator1 != '' && operator2 === '')
+    if (operator1 != '' && operator2 === '') {
      result = operate(input1, input2);
-    else if (operator2 != '')
+     console.log('enter1');
+    }
+    else if (operator2 != '') {
      result = operate(result, input2);
+     console.log('enter2');
+     input2 = '';
+    }
     });
 
 clr.addEventListener('click', (e) => {
@@ -98,13 +120,3 @@ clr.addEventListener('click', (e) => {
     operator2 = '';
     output.textContent = '0';
 })
-
-// 1st input = input1
-// 2nd input = operator1
-// 3rd input = input2
-// 4th input a = enter display outputput and store in result
-// 4th input b = operator2, display output and store in result
-// 5th input a = input2 if number, operator2 if operator
-// 5th input b = input2
-// 6th input a = input2 if number, operator2 if operator
-// 6th input b = 4th input a/b tree
