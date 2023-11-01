@@ -67,7 +67,7 @@ for (opera of operator) {
             input2 = '';
             console.log('opera3');
         }
-        else if (input2 != '' && operator2 === '') {
+        else if (input2 === '' && operator2 != '') {
             operator2 = e.target.innerText;
             currentOperand = operator2;
             input2 = '';
